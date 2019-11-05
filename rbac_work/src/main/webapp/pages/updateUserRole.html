@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <title>修改用户角色</title>
+    <script>
+        $(function () {
+            var url=window.location.search;
+            uid=url.split("=")[1];
+            $.ajax({
+                url:"/role/findAllRole",
+                type:"post",
+                dataType:"json",
+                success:function(data){
+                    var str=""
+                   str+="<form action=\"/userrole/insert\">" +
+                        "<input type=hidden id=uid name=uid value="+uid+">"
+                    $.each(data, function (index, item) {
+                        str+="<label><input type=radio name=role value='"+item.rid+"'id="+item.rid+
+                            ">"+item.status+"</label>"
+                    });
+                    str+="<input type='submit' value='修改'></form>"
+                    $("#role").html(str);
+                    $.ajax({
+                        url:"/userrole/find",
+                        type:"post",
+                        data:{"uid":uid},
+                        dataType:"json",
+                        success:function(data){
+                            $.each(data, function (index, item) {
+                                $("#"+item.rid).attr("checked",true);
+                            });
+                        }
+                    })
+
+
+                }
+            })
+
+
+
+
+        })
+
+    </script>
+</head>
+<body>
+<h1>修改用户角色</h1>
+<div id="role"></div>
+<a href="/pages/main.html">返回主界面</a>
+</body>
+</html>

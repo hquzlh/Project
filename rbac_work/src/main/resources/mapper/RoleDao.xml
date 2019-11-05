@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucar.train.dao.RoleDao">
+    <select id="findAllRole" resultType="com.ucar.train.domain.Role">
+        select * from t_role;
+    </select>
+    <insert id="insertRole" parameterType="com.ucar.train.domain.Role">
+        insert into t_role (status) values (#{status})
+    </insert>
+    <delete id="deleteRole"  parameterType="java.lang.Integer">
+        delete from t_role where rid=#{rid}
+    </delete>
+    <update id="updateRole" parameterType="com.ucar.train.domain.Role">
+        update t_role set status=#{status} where rid=#{rid}
+    </update>
+    <select id="findByRid" parameterType="java.lang.Integer" resultType="com.ucar.train.domain.Role">
+        select * from t_role where rid=#{rid};
+    </select>
+
+</mapper>

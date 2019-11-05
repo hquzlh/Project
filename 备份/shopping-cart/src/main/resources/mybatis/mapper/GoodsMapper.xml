@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhuliheng.shoppingcart.mapper.GoodsMapper">
+    <!--public List<Goods> findAllGoods();
+    public void insertGoods(Goods goods);
+    public void updateGoods(Goods goods);
+    public void updateStock(GoodsNumDto goodsNumDto);
+    public List<Goods> findByN(String name);
+    public Goods findByGid(Integer gid);-->
+    <select id="findAllGoods" resultType="com.zhuliheng.shoppingcart.entities.Goods">
+        select * from goods
+    </select>
+    <select id="findByGid" parameterType="java.lang.Integer" resultType="com.zhuliheng.shoppingcart.entities.Goods">
+        select * from goods where gid=#{gid};
+    </select>
+    <insert id="insertGoods" parameterType="com.zhuliheng.shoppingcart.entities.Goods">
+        insert into goods (name,price,num,one_tag,two_tag,img_uri) value(#{name},#{price},#{num},#{one_tag},#{two_tag},#{img_uri})
+    </insert>
+    <update id="updateGoods" parameterType="com.zhuliheng.shoppingcart.entities.Goods">
+        update goods set name=#{name},price=#{price},num=#{num}   where  gid=#{gid};
+    </update>
+    <update id="updateStock" parameterType="java.lang.Integer">
+        update goods set  num=#{num}  where gid=#{gid} ;
+    </update>
+    <select id="findByN" parameterType="java.lang.String" resultType="com.zhuliheng.shoppingcart.entities.Goods">
+        select distinct name,price,num,one_tag,two_tag,gid,img_uri from goods where name like #{name} or one_tag like #{name} or  two_tag like #{name};
+    </select>
+</mapper>

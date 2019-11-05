@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <title>管理留言</title>
+    <script>
+        $(function () {
+            $.ajax({
+                url: "/permission/findAllPer",
+                type: "post",
+                dataType: "json",
+                success: function (data) {
+                    var str = "<table><th>ID</th><th>权限名称</th><th>uri</th><td>操作</td>";
+                    //循环遍历json数组格式的数据
+                    $.each(data, function (index, item) {
+                        str += "<tr>+<td>" + item.pid + "</td><td> " + item.permission + "</td>" +
+                                "<td>"+item.uri+"</td>"+
+                            "<td><button class=deletePermission  id=delete-" + item.pid + ">删除</button>" +
+                            "<button class=updatePermission id=update-" +
+                            item.pid + ">编辑</button></td></tr>";
+                    });
+                    str += "</table>"
+                    $("#board").html(str);
+                }
+            })
+            $("body").on("click",".updatePermission",function () {
+                var pid=this.id.split("-")[1];
+                window.location.href="/pages/updatePermission.html?pid="+pid;
+            })
+            $("body").on("click",".deletePermission",function () {
+                var pid=this.id.split("-")[1];
+                $.ajax({
+                    url: "/permission/delete",
+                    type: "post",
+                    data: {"pid":pid},
+                    success:function(){
+                        window.location.reload();
+                    },
+                    error:function () {
+                        window.location.reload();
+                    }
+                });
+
+            })
+
+                $.ajax({
+                    url:"/permission/findByMy",
+                    type:"post",
+                    dataType:"json",
+                    success:function(data){
+                        var str="<li>";
+                        //循环遍历json数组格式的数据
+                        $.each(data, function (index, item) {
+                            str +="<ul><a href="+item.uri+">" + item.permission+"</a></ul>";
+                        });
+                        str+="</li>"
+                        $("#menu").html(str);}})
+
+        })
+    </script>
+</head>
+<body>
+<div id="menu"></div>
+<div id="board"></div>
+</body>
+</html>

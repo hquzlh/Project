@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucar.training.dao.UserDao">
+    <resultMap type="User" id="userMap">
+        <result column="uname" property="uname"/>
+        <result column="tname" property="tname"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+        <result column="pwd" property="pwd"/>
+        <result column="tel" property="tel"/>
+        <result column="email" property="email"/>
+        <result column="hobby" property="hobbyStr"/>
+        <result column="isAdmin" property="isAdmin"/>
+    </resultMap>
+    <resultMap type="Message" id="messageMap">
+        <result column="name" property="name"/>
+        <result column="message" property="message"/>
+        <result column="date" property="date"/>
+    </resultMap>
+    <!--查询所有用户-->
+    <select id="selectAll" resultMap="userMap">
+        select *from t_user;
+    </select>
+    <!--查询所有留言-->
+    <select id="selectMAll" resultMap="messageMap" >
+        select *from t_board;
+    </select>
+    <!--根据用户名查找用户-->
+    <select id="selectByName" parameterType="string" resultMap="userMap">
+       select * from t_user where uname=#{uname};
+    </select>
+    <!--根据用户名和密码查找用户-->
+    <select id="selectByNP" parameterType="string" resultMap="userMap">
+     select * from t_user where uname=#{uname} and pwd=#{pwd};
+    </select>
+    <!--新增用户-->
+    <insert id="insertD" parameterType="User">
+        insert into t_user (uname,tname,sex,age,pwd,tel,email,hobby,isAdmin) values (#{uname},#{tname},#{sex},#{age},#{pwd},#{tel},#{email},#{hobbyStr},#{isAdmin});
+    </insert>
+    <!--新增留言-->
+    <insert id="messageD" parameterType="Message">
+        insert into t_board ( name ,message, date) values (#{name},#{message},#{date});
+    </insert>
+
+
+
+</mapper>

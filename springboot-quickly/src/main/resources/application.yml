@@ -1,0 +1,12 @@
+person:
+  name: zzk
+  id: 12
+  boss: true
+  birth: 2019/9/9
+  map: {k1: 2,k2: 3}
+  list:
+    - lisi
+    - zhangsan
+  dog:
+    name: zhangsan
+    id: 3

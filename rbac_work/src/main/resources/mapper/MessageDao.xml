@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucar.train.dao.MessageDao">
+    <select id="findAllMessage" resultType="com.ucar.train.domain.Message">
+        select * from t_board
+    </select>
+    <insert id="insertMessage" parameterType="com.ucar.train.domain.Message">
+        insert into t_board (name,message,date) values(#{name},#{message},#{date})
+    </insert>
+    <delete id="deleteMessage"  parameterType="java.lang.Integer">
+        delete from t_board where bid=#{bid}
+    </delete>
+    <update id="updateMessage" parameterType="com.ucar.train.domain.Message">
+        update t_board set message=#{message}   where bid=#{bid};
+    </update>
+    <select id="findByBid" parameterType="com.ucar.train.domain.Message" resultType="com.ucar.train.domain.Message">
+        select * from t_board where bid=#{bid};
+    </select>
+</mapper>

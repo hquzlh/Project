@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<h1>欢迎</h1>
+<div th:text="${hello}">默认</div>
+<div th:utext="${hello}">默认</div>
+<hr>
+<h4 th:text="${user1}" th:each="user1:${user}" ></h4>
+<hr>
+<h4>
+    <span th:each="user:${user}">[[${user}]]</span>
+</h4>
+</body>
+</html>

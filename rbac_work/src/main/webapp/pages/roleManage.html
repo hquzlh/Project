@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <title>所有角色信息</title>
+    <script>
+        $(function () {
+            $.ajax({
+                url:"/role/findAllRole",
+                type:"post",
+                dataType:"json",
+                success:function(data){
+                    var str="<table><th>RID</th><th>角色名</th><th>操作</th>";
+                    //循环遍历json数组格式的数据
+                    $.each(data, function (index, item) {
+                        str +="<tr>+<td>" + item.rid+"</td><td> "+item.status+"</td>" +
+                            "<td>" +
+                            "<button class=deleteRole id=delete-"+item.rid+">删除</button>" +
+                            "<button class=updateRole id=update-"+item.rid+">编辑</button>" +
+                            "<button class=updatePer id=update-"+item.rid+">修改权限</button>"
+                            "</td></tr>";
+                    });
+                    str+="</table>"
+                    $("#board").html(str);
+                }})
+            $("body").on("click",".updateRole",function () {
+                var rid=this.id.split("-")[1];
+                window.location.href="/pages/updateRole.html?rid="+rid;
+            })
+            $("body").on("click",".updatePer",function () {
+                var rid=this.id.split("-")[1];
+                window.location.href="/pages/updateRolePer.html?rid="+rid;
+            })
+            $("body").on("click",".deleteRole",function () {
+                var rid=this.id.split("-")[1];
+                $.ajax({
+                    url: "/role/delete",
+                    type: "post",
+                    data: {"rid":rid},
+                    success:function(){
+                        window.location.reload();
+                    },
+                    error:function () {
+                        window.location.reload();
+                    }
+                });
+
+            })
+            $.ajax({
+                url:"/permission/findByMy",
+                type:"post",
+                dataType:"json",
+                success:function(data){
+                    var str="<li>";
+                    //循环遍历json数组格式的数据
+                    $.each(data, function (index, item) {
+                        str +="<ul><a href="+item.uri+">" + item.permission+"</a></ul>";
+                    });
+                    str+="</li>"
+                    $("#menu").html(str);}})
+        })
+    </script>
+</head>
+<body>
+<div id="menu"></div>
+<div id="board"></div>
+<a href="/pages/main.html">返回首页</a>
+</body>
+</html>

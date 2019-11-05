@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <title>修改角色信息</title>
+    <script>
+        $(function () {
+            var url=window.location.search;
+            rid=url.split("=")[1];
+            $.ajax({
+                url:"/role/findByRid",
+                type:"post",
+                data:{"rid":rid},
+                dataType:"json",
+                success:function(data){
+                    var str="<form action=\"/role/update\">"
+                    str+= "<input type=hidden id=rid name=rid value=" +data.rid+
+                        ">角色名<input type=text id=status name=status value="+data.status+
+                        "><input type=submit value='修改'></form>"
+                    $("#update").html(str);
+                }
+            })
+
+
+
+        })
+    </script>
+</head>
+<body>
+
+<div id="update"></div>
+<a href="/pages/main.html">返回主界面</a>
+</body>
+</html>

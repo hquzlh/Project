@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucar.train.dao.RolePerDao">
+    <select id="findPermissionByRid" parameterType="java.lang.Integer" resultType="com.ucar.train.domain.Permission">
+        select p.* from role_per rp  join t_permissions p on rp.pid=p.pid where rp.rid=#{rid};
+    </select>
+    <delete id="deletePermissionByRid" parameterType="java.lang.Integer">
+        delete from role_per where rid=#{rid}
+    </delete>
+    <insert id="insertPermission" parameterType="com.ucar.train.domain.RolePermission">
+        insert into role_per (rid,pid) values (#{rid},#{pid})
+    </insert>
+</mapper>

@@ -1,0 +1,59 @@
+#top{border:  solid 2px orchid;height: 200px;width: 100%;
+    border-image: -webkit-linear-gradient( #f328ff, blue) 30 30;
+    border-image: -moz-linear-gradient( #ffa9a5, #ff7932) 30 30;
+    border-image: linear-gradient( red , #33ffe7) 30 30;}
+#left{border:  solid 2px orchid;height: 650px;width: 20%;
+    border-image: -webkit-linear-gradient( lawngreen , blue) 30 30;
+    border-image: -moz-linear-gradient( #bc9bff, blue) 30 30;
+    border-image: linear-gradient( #29ff10, #f5ff2e) 30 30;}
+#main{border:  solid 2px orchid;height: 650px;width: 77%;
+    border-image: -webkit-linear-gradient( #553bff, #ff93a2) 30 30;
+    border-image: -moz-linear-gradient( red, #76ffa4) 30 30;
+    border-image: linear-gradient( #ff9c07, #ff0c81) 30 30;}
+body{background-image:url("image/i1.jpg");background-size: 100%}
+#image{position: absolute;height: 50%;width: 200px;margin-left: 5px;margin-bottom: 0px;}
+#topMenu{position: absolute;margin-top: 130px;margin-left: 230px;}
+#leftMenu{position: absolute;margin-right: 5px;}
+.menu li{display:inline-block}
+button {
+    color: midnightblue;
+    background: deepskyblue;
+    border: 1px cornflowerblue solid;
+    padding: 5px 10px;
+    border-radius: 2px;
+    font-weight: bold;
+    font-size: 11pt;
+    outline: none;
+    width: 90px;
+    height: 45px;
+    margin-top: 5px;
+}
+th {
+    vertical-align:baseline;
+    padding:5px 15px 5px 6px;
+    background-color:royalblue;
+    border:1px solid blue;
+    text-align:left;
+    color:#fff;
+}
+td {
+    vertical-align:text-top;
+    padding:6px 15px 6px 6px;
+    border:1px solid #aaa;
+}
+tr:nth-child(odd) {
+    background-color:#F5F5F5;
+}
+h2{
+    text-align: center;
+    margin: 25px auto;
+    font-family: "League-Gothic", Courier;
+    font-size: 40px;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;
+
+}
+ul{
+    list-style-type: none;
+}

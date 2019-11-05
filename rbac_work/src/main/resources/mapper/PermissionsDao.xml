@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucar.train.dao.PermissionDao">
+<select id="findPerByUid" parameterType="java.lang.Integer" resultType="com.ucar.train.domain.Permission">
+ select *from (select rp.pid from (select ur.rid from (t_user u)  left join user_role ur
+ on u.uid=ur.uid  where u.uid=#{uid}) as t1 left join role_per rp on t1.rid=rp.rid) as t
+ left join t_permissions p on t.pid=p.pid;
+</select>
+ <select id="findAllPer" resultType="com.ucar.train.domain.Permission">
+  select * from t_permissions;
+ </select>
+ <delete id="deletePerByPid" parameterType="java.lang.Integer">
+  delete from t_permissions where pid=#{pid}
+ </delete>
+ <update id="updatePer" parameterType="com.ucar.train.domain.Permission">
+  update t_permissions set permission=#{permission},uri=#{uri} where pid=#{pid}
+ </update>
+ <insert id="insertPer" parameterType="com.ucar.train.domain.Permission">
+
+  insert into t_permissions (permission,uri) values (#{permission},#{uri})
+ </insert>
+ <select id="findByPid" parameterType="java.lang.Integer" resultType="com.ucar.train.domain.Permission">
+  select * from t_permissions where pid=#{pid}
+ </select>
+</mapper>
+
+
+
+
+

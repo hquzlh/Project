@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhuliheng.shoppingcart.mapper.CartMapper">
+<!--public List<Cart> findAllOrder(Interger uid);
+    public void deleteAllOrder(Integer uid);
+    public void insertOrder(Cart cart);
+    public void deleteOrder(Integer id);
+    public void upNum(CartNumDto cartNumDto);
+    public void downNum(CartNumDto cartNumDto);
+-->
+    <select id="findAllCart"  parameterType="java.lang.Integer" resultType="com.zhuliheng.shoppingcart.entities.Cart">
+        select * from cart where uid=#{uid};
+    </select>
+    <insert id="insertCart" parameterType="com.zhuliheng.shoppingcart.entities.Cart">
+        insert into cart (uid,gid,name,num,price,one_tag,two_tag) values (#{uid},#{gid},#{name},#{num},#{price},#{one_tag},#{two_tag});
+    </insert>
+    <delete id="deleteAllCart" parameterType="java.lang.Integer">
+        delete from cart where uid=#{uid}
+    </delete>
+    <delete id="deleteCart" parameterType="java.lang.Integer">
+        delete from cart where id=#{id}
+    </delete>
+    <update id="upNum" parameterType="java.lang.Integer">
+        update cart set  num=num+1  where id=#{id} ;
+    </update>
+    <update id="downNum" parameterType="java.lang.Integer">
+        update cart set  num=num-1  where id=#{id} ;
+    </update>
+    <select id="findById" parameterType="java.lang.Integer" resultType="com.zhuliheng.shoppingcart.entities.Cart">
+        select * from cart where id=#{id};
+    </select>
+
+    
+</mapper>

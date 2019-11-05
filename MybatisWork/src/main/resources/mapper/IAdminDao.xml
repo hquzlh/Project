@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucar.training.dao.AdminDao">
+    <resultMap type="com.ucar.training.bean.User" id="userMap">
+        <result column="uname" property="uname"/>
+        <result column="tname" property="tname"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+        <result column="pwd" property="pwd"/>
+        <result column="tel" property="tel"/>
+        <result column="email" property="email"/>
+        <result column="hobby" property="hobbyStr"/>
+        <result column="isAdmin" property="isAdmin"/>
+    </resultMap>
+    <resultMap type="Message" id="messageMap">
+        <result column="name" property="name"/>
+        <result column="message" property="message"/>
+        <result column="date" property="date"/>
+    </resultMap>
+    <!--配置查询所有管理员-->
+    <select id="selectAAll" resultMap="userMap">
+        select *from t_admin;
+    </select>
+    <!--配置查询所有用户-->
+    <select id="selectUAll" resultMap="userMap">
+        select *from t_user;
+    </select>
+    <!--配置查询所有留言-->
+    <select id="selectMAll" resultMap="messageMap">
+        select *from t_board;
+    </select>
+    <!--根据用户名查找管理员-->
+    <select id="selectByName" parameterType="string" resultMap="userMap">
+     select * from t_admin where uname=#{uname};
+    </select>
+    <!--根据用户名查找用户-->
+    <select id="selectD" parameterType="string" resultMap="userMap">
+       select * from t_user where uname=#{uname};
+    </select>
+    <!--根据用户名和密码查找管理员-->
+    <select id="selectByNP" parameterType="string" resultMap="userMap">
+     select * from t_admin where uname=#{uname} and pwd=#{pwd};
+    </select>
+    <!--新增管理员-->
+    <insert id="insertD" parameterType="com.ucar.training.bean.User" >
+        insert into t_admin (uname,tname,sex,age,pwd,tel,email,hobby,isAdmin) values (#{uname},#{tname},#{sex},#{age},#{pwd},#{tel},#{email},#{hobbyStr},#{isAdmin});
+    </insert>
+    <!--新增用户-->
+    <insert id="insertUserD" parameterType="com.ucar.training.bean.User">
+        insert into t_user (uname,tname,sex,age,pwd,tel,email,hobby,isAdmin) values (#{uname},#{tname},#{sex},#{age},#{pwd},#{tel},#{email},#{hobbyStr},#{isAdmin});
+    </insert>
+    <!--更新用户-->
+    <update id="updateD" parameterType="com.ucar.training.bean.User">
+        update t_user set  tname=#{tname},sex=#{sex},age=#{age},pwd=#{pwd},tel=#{tel},email=#{email},hobby=#{hobbyStr}  where uname=#{uname};
+    </update>
+    <!--删除用户-->
+    <delete id="deleteD" parameterType="string">
+        delete from t_user where uname=#{uname} ;
+    </delete>
+    <!--删除留言-->
+    <delete id="deleteMD" parameterType="string">
+        delete from t_board where name=#{name} and date=#{date};
+    </delete>
+
+
+</mapper>

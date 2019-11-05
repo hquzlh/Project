@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <title>修改信息</title>
+    <script>
+        $(function () {
+            $.ajax({
+                url:"/user/findMyUser",
+                type:"post",
+                dataType:"json",
+                success:function(data){
+                    var str="";
+                    str+="<form action='/user/update'>" +
+                        "<input type='hidden' id=uid name=uid value="+data.uid+">"+
+                        "用户名<input type=text id=uname name=uname value="+data.uname+">"+
+                        "密码<input type=text id=password name=password value="+data.password+">" +
+                        "<input type=submit value='修改'>" +
+                        "</form>"
+                    $("#update").html(str);
+                }
+            })
+
+
+        })
+    </script>
+</head>
+<body>
+<h1>修改本用户</h1>
+<div id="update"></div>
+<a href="/pages/main.html">返回主界面</a>
+</body>
+</html>

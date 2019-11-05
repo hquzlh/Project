@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhuliheng.shoppingcart.mapper.OrderMapper">
+    <!--
+    public List<Order> findOrderByUid(Integer uid);
+    public void insert(Order order);
+    public Integer findOrderNumber();
+    public List<Order> findOrderByName(String name);
+-->
+    <select id="findOrderByUid" parameterType="java.lang.Integer" resultType="com.zhuliheng.shoppingcart.entities.Order">
+        select * from orders where uid=#{uid};
+    </select>
+    <select id="findOrderNumber" resultType="java.lang.Integer">
+        select max(orderNumber) from orders;
+    </select>
+
+    <insert id="insert" parameterType="com.zhuliheng.shoppingcart.entities.Goods" useGeneratedKeys="true" keyProperty="id">
+        insert into orders (uid,gid,orderNumber,date,num) values (#{uid},#{gid},#{orderNumber},#{date},#{num});
+    </insert>
+</mapper>
